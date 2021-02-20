@@ -13,6 +13,7 @@ import {
 //import setup from "./setup";
 import Firebase from '../config/firebase';
 
+
 class Login extends Component {
   constructor(props) {
     super(props)
@@ -30,12 +31,14 @@ class Login extends Component {
 
     Firebase.auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => this.props.navigation.navigate('Splash'))
+      .then(() => {
+        this.props.navigation.navigate('Splash');
+      })
       .catch(error => {
         this.setState({ isError: true })
         this.setState({ error });
         setTimeout(() => {
-          this.setState({ isError: false, email: '', name: '', password: '' })
+          this.setState({ isError: false, email: '', password: '' })
         }, 2500)
       })
   }

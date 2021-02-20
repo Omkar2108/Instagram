@@ -16,7 +16,7 @@ const AppNavigator = createStackNavigator({
   Register: {
     screen: Register
   },
-  Profile: {
+  Splash: {
     screen: Splash
   }
 });
