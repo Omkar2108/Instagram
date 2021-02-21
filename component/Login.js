@@ -38,7 +38,7 @@ class Login extends Component {
         this.setState({ isError: true })
         this.setState({ error });
         setTimeout(() => {
-          this.setState({ isError: false, email: '', password: '' })
+          this.setState({ isError: false, email: '', password: '', error: '' });
         }, 2500)
       })
   }
@@ -79,6 +79,7 @@ class Login extends Component {
           <Button
             title="Sign In"
             // color="blue"
+            type="submit"
             onPress={() => this.handleLogin()}
           />
           <Text> </Text>

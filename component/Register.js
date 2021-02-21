@@ -17,7 +17,15 @@ class Register extends Component {
 
     Firebase.auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(() => this.props.navigation.navigate('Login'))
+      .then(() => {
+        const message = "Signup Successfully";
+        this.setState({ isError: true });
+        this.setState({ isError: true, error: message })
+        setTimeout(() => {
+          this.setState({ isError: false, name: '', email: '', password: '' })
+        }, 1000)
+        this.props.navigation.navigate('Login');
+      })
       .catch(error => {
         this.setState({ isError: true })
         this.setState({ error });
@@ -25,7 +33,6 @@ class Register extends Component {
           this.setState({ isError: false, email: '', name: '', password: '' })
         }, 2500)
       })
-    // setTimeout(() => { }, 200)
   }
   render() {
     return (
