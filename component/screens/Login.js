@@ -5,13 +5,10 @@ import {
   TextInput,
   StyleSheet,
   Text,
-  Image,
-  SafeAreaView,
   ImageBackground,
-
 } from "react-native";
-//import setup from "./setup";
-import Firebase from '../config/firebase';
+import { TouchableOpacity } from "react-native-gesture-handler";
+import Firebase from '../../config/firebase';
 
 
 class Login extends Component {
@@ -30,7 +27,7 @@ class Login extends Component {
     const { email, password } = this.state;
 
     Firebase.auth()
-      .signInWithEmailAndPassword(email, password)
+      .signInWithEmailAndPassword(email.trim(), password)
       .then(() => {
         this.props.navigation.navigate('Splash');
       })
@@ -43,7 +40,6 @@ class Login extends Component {
       })
   }
 
-
   render() {
 
 
@@ -52,7 +48,7 @@ class Login extends Component {
 
 
     return (
-      <ImageBackground style={{ flex: 1, }} source={require('../assets/back.png')}>
+      <ImageBackground style={{ flex: 1, }} source={require('../../assets/back.png')}>
         <Text style={{ fontSize: 50, color: 'pink', textAlign: 'center', paddingTop: 20 }}>Instagram</Text>
         <View style={styles.container}>
 
@@ -84,7 +80,11 @@ class Login extends Component {
           />
           <Text> </Text>
 
-          <Text style={{ color: 'white' }}> Don't Have An Account? </Text>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('ForgotPassword')} >
+            <Text style={{ fontSize: 18 }}>Forgot Password</Text>
+          </TouchableOpacity>
+          <Text></Text>
+          <Text style={{ color: 'white', fontSize: 18 }}> Don't Have An Account? </Text>
           <Text> </Text>
           <Button
             title="Sign Up"

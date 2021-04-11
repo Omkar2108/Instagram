@@ -1,6 +1,7 @@
 import React, { Component, useEffect } from "react";
-import { StyleSheet, Text, View, TextInput, Button, ImageBackground, } from "react-native";
+import { StyleSheet, Text, View, TextInput, Button, ImageBackground } from "react-native";
 import Firebase from 'firebase'
+
 class Register extends Component {
   constructor(props) {
     super(props);
@@ -12,15 +13,18 @@ class Register extends Component {
       isError: false,
     })
   }
+
+
   handleSignUp = () => {
     const { email, password } = this.state;
 
     Firebase.auth()
-      .createUserWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(email.trim(), password)
       .then(() => {
         const message = "Signup Successfully";
-        this.setState({ isError: true });
-        this.setState({ isError: true, error: message })
+        // this.setState({ isError: true });
+        // this.setState({ error: message })
+        alert(message);
         setTimeout(() => {
           this.setState({ isError: false, name: '', email: '', password: '' })
         }, 1000)
@@ -36,23 +40,16 @@ class Register extends Component {
   }
   render() {
     return (
-      <ImageBackground style={{ flex: 1 }} source={require('../assets/back.png')} >
+      <ImageBackground style={{ flex: 1 }} source={require('../../assets/back.png')}>
         <View style={styles.container}>
           {this.state.isError ? <Text style={{ fontSize: 18, color: "red", backgroundColor: "white", borderColor: "black", borderWidth: .5, textTransform: 'capitalize' }}>
             {this.state.error.message}
           </Text> : <Text></Text>}
-          <TextInput
+          {/* <TextInput
             style={styles.input}
             value={this.state.name}
             placeholder='Your name'
             onChangeText={name => this.setState({ name })}
-            placeholderTextColor='#696969'
-
-          />
-          {/* <TextInput
-            style={styles.input}
-            value={this.state.}
-            placeholder='Username'
             placeholderTextColor='#696969'
 
           /> */}
