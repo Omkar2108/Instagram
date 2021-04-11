@@ -13,3 +13,5 @@ web-build/
 .DS_Store
 config/firebase.env
 .gitignore
+*.pub
+key
